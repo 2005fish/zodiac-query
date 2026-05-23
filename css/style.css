@@ -1,0 +1,558 @@
+:root {
+  --bg-primary: #0a0a2e;
+  --bg-secondary: #1a1a4e;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --bg-card-hover: rgba(255, 255, 255, 0.1);
+  --text-primary: #e8e8f0;
+  --text-secondary: #a0a0c0;
+  --accent: #ffd700;
+  --accent-light: rgba(255, 215, 0, 0.15);
+  --border: rgba(255, 255, 255, 0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 30%, #0d0d3a 60%, #0a0a2e 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 星空背景 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 15%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 25% 35%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 55% 25%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 85% 20%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 30% 70%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 65% 60%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 80% 75%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 95% 45%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 20% 85%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 45% 80%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 75% 15%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 60% 85%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 5% 30%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 35% 95%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 55% 5%, rgba(255,255,255,0.7), transparent);
+  pointer-events: none;
+  z-index: 0;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* ========== 容器 ========== */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Header ========== */
+header {
+  text-align: center;
+  padding: 40px 0 20px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffd700, #ffed4a, #f0c040);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+header .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+}
+
+/* ========== Tab 导航 ========== */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ========== Tab 内容 ========== */
+.tab-panel {
+  display: none;
+  animation: fadeSlideIn 0.4s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.fade-in { animation: fadeIn 0.4s ease; }
+
+/* ========== 卡片通用 ========== */
+.result-card, .detail-card, .match-card, .horoscope-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+
+/* ========== 查询 Tab ========== */
+.query-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.query-form input[type="text"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s;
+}
+
+.query-form input[type="date"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffd700, #f0a500);
+  color: #1a1a2e;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* 查询结果卡片 */
+.result-card {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.zodiac-symbol-large {
+  font-size: 5rem;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.result-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.zodiac-name-en {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.zodiac-date {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.element-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--accent-light);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+/* 详情卡片 */
+.detail-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.detail-desc {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  line-height: 1.8;
+}
+
+/* ========== 配对 Tab ========== */
+.match-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.match-form select {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0c0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.match-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.match-vs {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.match-pair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.match-zodiac {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.match-symbol {
+  font-size: 3rem;
+}
+
+.match-heart {
+  font-size: 2rem;
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.match-score {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.score-total {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.match-level {
+  text-align: center;
+  padding: 8px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 0 auto 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.match-card {
+  text-align: center;
+}
+
+.match-desc {
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+.match-tip {
+  background: var(--accent-light);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ========== 运势 Tab ========== */
+.horoscope-selector {
+  margin-bottom: 20px;
+}
+
+.horoscope-selector select {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0c0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.horoscope-selector select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.horoscope-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.horoscope-symbol {
+  font-size: 3rem;
+}
+
+.horoscope-header h3 {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.horoscope-date {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.horoscope-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.horoscope-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.horoscope-cat {
+  font-weight: 600;
+  font-size: 0.95rem;
+  min-width: 70px;
+  color: var(--accent);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  font-size: 1.1rem;
+  min-width: 100px;
+}
+
+.star.filled { color: #ffd700; }
+.star.empty  { color: rgba(255, 255, 255, 0.2); }
+
+.horoscope-text {
+  flex: 1;
+  min-width: 200px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ========== Toast ========== */
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px);
+  background: #f44336;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  z-index: 999;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== Footer ========== */
+footer {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  opacity: 0.6;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  header { padding: 28px 0 16px; }
+  header h1 { font-size: 1.6rem; letter-spacing: 2px; }
+
+  .tab-btn { padding: 10px 8px; font-size: 0.85rem; }
+
+  .detail-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .match-form { flex-direction: column; }
+  .match-vs { transform: rotate(90deg); }
+
+  .horoscope-item { flex-direction: column; align-items: flex-start; }
+  .horoscope-cat { min-width: auto; }
+
+  .query-form { flex-direction: column; }
+  .query-form .btn { width: 100%; }
+
+  .result-card, .detail-card, .match-card, .horoscope-card { padding: 20px; }
+
+  .zodiac-symbol-large { font-size: 3.5rem; }
+  .match-symbol { font-size: 2.2rem; }
+}

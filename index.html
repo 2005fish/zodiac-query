@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星座查询 - 探索你的星座密码</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>✨ 星座查询 ✨</h1>
+    <p class="subtitle">探索你的星座密码，发现星空的秘密</p>
+  </header>
+
+  <!-- Tab 导航 -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="panel-query">🔍 查询星座</button>
+    <button class="tab-btn" data-tab="panel-match">💕 星座配对</button>
+    <button class="tab-btn" data-tab="panel-horoscope">🌟 每日运势</button>
+  </nav>
+
+  <!-- 查询星座 -->
+  <section class="tab-panel active" id="panel-query">
+    <div class="query-form">
+      <input type="text" id="birthDate" placeholder="请输入生日 如 1990-05-20" pattern="\d{4}-\d{2}-\d{2}">
+      <button class="btn btn-primary" id="queryBtn">查询星座</button>
+    </div>
+    <div id="queryResult"></div>
+    <div id="zodiacDetail"></div>
+  </section>
+
+  <!-- 星座配对 -->
+  <section class="tab-panel" id="panel-match">
+    <div class="match-form">
+      <select id="zodiacSelect1"></select>
+      <span class="match-vs">VS</span>
+      <select id="zodiacSelect2"></select>
+      <button class="btn btn-primary" id="matchBtn">查看配对</button>
+    </div>
+    <div id="matchResult"></div>
+  </section>
+
+  <!-- 每日运势 -->
+  <section class="tab-panel" id="panel-horoscope">
+    <div class="horoscope-selector">
+      <select id="horoscopeSelect"></select>
+    </div>
+    <div id="horoscopeResult"></div>
+  </section>
+
+  <footer>
+    <p>星座查询小工具 · 仅供娱乐参考</p>
+  </footer>
+</div>
+
+<!-- Toast 提示 -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
